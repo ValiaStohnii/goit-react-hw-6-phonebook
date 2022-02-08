@@ -1,17 +1,12 @@
-export const App = () => {
+import './App.css';
+import Phonebook from './Components/phonebook';
+
+function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        textTransform: 'uppercase',
-        color: '#010101',
-      }}
-    >
-      React homework template
+    <div className="App">
+      <Phonebook />
     </div>
   );
-};
+}
+
+export default App;
