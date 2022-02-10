@@ -1,7 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import contactsReducer from './contacts';
+import contactsReducer from './contacts/contacts-reducer';
 import logger from 'redux-logger';
 
 const middleware = [...getDefaultMiddleware(), logger];
@@ -22,4 +22,6 @@ const store = configureStore({
 
 const persist = persistStore(store);
 
-export { store, persist };
+const Store = { store, persist };
+
+export default Store;

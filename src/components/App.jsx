@@ -1,5 +1,4 @@
-import './App.css';
-import Phonebook from './Components/phonebook';
+import Phonebook from './phonebook';
 
 function App() {
   return (
