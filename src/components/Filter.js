@@ -8,7 +8,7 @@ const Filter = () => {
   const dispatch = useDispatch();
   return (
     <label>
-      Filter{' '}
+      Filter
       <input
         type="text"
         value={value}

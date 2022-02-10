@@ -1,18 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Form from './Form';
 import ContactList from './ContactList';
 import { nanoid } from 'nanoid';
 import Filter from './Filter';
+import { useDispatch } from 'react-redux';
+import contactsAction from 'redux/contacts/contacts-actions';
 
 export default function Phonebook() {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
-  });
-  const [filter, setFilter] = useState('');
+  const [contacts, setContacts] = useState([]);
+  // () => {
+  // return JSON.parse(window.localStorage.getItem('contacts')) ?? [];}
 
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  const [filter, setFilter] = useState('');
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   window.localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
   const formSubmit = data => {
     const contact = {
@@ -28,6 +32,7 @@ export default function Phonebook() {
       alert('This name is olready in contact');
       return;
     }
+    dispatch(contactsAction.addContact(contact));
     setContacts(prevState => [contact, ...prevState]);
   };
 
@@ -35,16 +40,16 @@ export default function Phonebook() {
     setFilter(e.currentTarget.value);
   };
 
-  const getFilteredContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(c =>
-      c.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
+  // const getFilteredContacts = () => {
+  //   const normalizedFilter = filter.toLowerCase();
+  //   return contacts.filter(c =>
+  //     c.name.toLowerCase().includes(normalizedFilter)
+  //   );
+  // };
 
-  const deleteContact = contactId => {
-    setContacts(prevState => prevState.filter(c => c.id !== contactId));
-  };
+  // const deleteContact = contactId => {
+  //   setContacts(prevState => prevState.filter(c => c.id !== contactId));
+  // };
 
   return (
     <div>
@@ -53,8 +58,8 @@ export default function Phonebook() {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
       <ContactList
-        contacts={getFilteredContacts()}
-        onDeleteContact={deleteContact}
+      // contacts={getFilteredContacts()}
+      // onDeleteContact={deleteContact}
       />
     </div>
   );
